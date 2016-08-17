@@ -1,0 +1,116 @@
+{
+  "prompt": "Is this a new feature?",
+  "answer": "yes",
+  "children": [
+    {
+      "answer": "yes",
+      "prompt": "Do you have a feature branch?",
+      "children": [
+        {
+          "answer": "yes",
+          "prompt": "Are there any changes to be committed?",
+          "children": [
+            {
+              "answer": "yes",
+              "prompt": "`git add . && git commit`",
+              "children": []
+            },
+            {
+              "answer": "no",
+              "prompt": "Have you pushed to your fork?",
+              "children": [
+                {
+                  "answer": "yes",
+                  "prompt": "Have you created a pull request to the organization?",
+                  "children": [
+                    {
+                      "answer": "yes",
+                      "prompt": "Is your feature done?",
+                      "children": [
+                        {
+                          "answer": "yes",
+                          "prompt": "Have you had a team member code review your pull-request?",
+                          "children": [
+                            {
+                              "answer": "yes",
+                              "prompt": "Have your team member merge the pull request",
+                              "children": []
+                            },
+                            {
+                              "answer": "no",
+                              "prompt": "Is your branch up to date with `upstream master`?",
+                              "children": [
+                                {
+                                  "answer": "yes",
+                                  "prompt": "Have a sit down with your team member and review the pull request",
+                                  "children": []
+                                },
+                                {
+                                  "answer": "no",
+                                  "prompt": "`git pull upstream master`",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "answer": "no",
+                      "prompt": "`hub pull-request`",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "answer": "no",
+                  "prompt": "`git push origin HEAD` (same as `git push origin feature/<feature-name>`)",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "answer": "no",
+          "prompt": "`git checkout -b feature/<feature-name>`",
+          "children": []
+        }
+      ]
+    },
+    {
+      "answer": "no",
+      "prompt": "Are you finished with your last feature?",
+      "children": [
+        {
+          "answer": "yes",
+          "prompt": "Are you on your local master branch?",
+          "children": [
+            {
+              "answer": "yes",
+              "prompt": "Is your master branch up to date with `upstream master`?",
+              "children": [
+                {
+                  "answer": "yes",
+                  "prompt": "Sounds like you are ready to start a new feature!",
+                  "children": []
+                },
+                {
+                  "answer": "no",
+                  "prompt": "`git pull upstream master && git push origin master`",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "answer": "no",
+              "prompt": "`git checkout master`",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
