@@ -9,19 +9,20 @@ defmodule GithubflowApi.DecisionTree do
     GenServer.call(:decision_tree, {:question, id})
   end
 
+  def find(last_question, response) do
+    GenServer.call(:decision_tree, {:response, last_question, response})
+  end
+
+  def handle_call({:response, last_question, response}, _from, state) do
+    response = GithubflowApi.DecisionTreeDataParser.find_question(last_question, response)
+
+    {:reply, response, state}
+  end
+
   def handle_call({:question, id}, _from, state) do
     case id do
       1 ->
         response = GithubflowApi.DecisionTreeDataParser.find_question("Is this a new feature?", "yes")
-
-        {:reply, response, state}
-      2 ->
-        response = %{
-          id: 1,
-          prompt: "Is this a new feature?",
-          complete: false,
-          responses: ["Yes", "No"]
-        }
 
         {:reply, response, state}
       _ ->

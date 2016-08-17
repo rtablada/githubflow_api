@@ -18,4 +18,13 @@ defmodule GithubflowApi.QuestionController do
     json(conn, res_data)
   end
 
+  def show(conn, %{"last_question" => last_question, "response" => response}) do
+    data =  DecisionTree.find last_question, response
+
+    res_data = GithubflowApi.QuestionSerializer.format(data, conn)
+    # |> Poison.encode!
+
+    json(conn, res_data)
+  end
+
 end

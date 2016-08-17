@@ -9,5 +9,6 @@ defmodule GithubflowApi.Router do
     pipe_through :api
 
     get "/questions/start", QuestionController, :index
+    get "/questions", QuestionController, :show
   end
 end
