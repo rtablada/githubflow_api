@@ -5,6 +5,9 @@
 # is restricted to this project.
 use Mix.Config
 
+config :phoenix, :format_encoders,
+  "json-api": Poison
+
 # Configures the endpoint
 config :githubflow_api, GithubflowApi.Endpoint,
   url: [host: "localhost"],
