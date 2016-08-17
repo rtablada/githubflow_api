@@ -4,6 +4,18 @@ defmodule GithubflowApi.DecisionTreeDataParser do
     |> Poison.decode!(keys: :atoms)
   end
 
+  def parse_question(json) do
+    %{
+      prompt: json.prompt,
+      responses: Enum.map(json.children, fn child -> child.answer end),
+      complete: 0 == length(json.children)
+    }
+  end
+
+  def find_root do
+    parse_question data
+  end
+
   def find_question(tree, from_prompt, response) do
     if 0 == length(tree.children) do
       {:not_found}
@@ -14,11 +26,7 @@ defmodule GithubflowApi.DecisionTreeDataParser do
         possible = Enum.filter(tree.children, fn child -> child.answer == response end)
         |> List.first
 
-        %{
-          prompt: possible.prompt,
-          responses: Enum.map(possible.children, fn child -> child.answer end),
-          complete: 0 == length(possible.children)
-        }
+        parse_question possible
       _ ->
         Enum.reduce_while(tree.children, nil, fn child, accum ->
           result = find_question(child, from_prompt, response)

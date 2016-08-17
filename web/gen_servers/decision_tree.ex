@@ -22,7 +22,7 @@ defmodule GithubflowApi.DecisionTree do
   def handle_call({:question, id}, _from, state) do
     case id do
       1 ->
-        response = GithubflowApi.DecisionTreeDataParser.find_question("Is this a new feature?", "yes")
+        response = GithubflowApi.DecisionTreeDataParser.find_root
 
         {:reply, response, state}
       _ ->
