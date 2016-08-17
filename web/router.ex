@@ -11,6 +11,7 @@ defmodule GithubflowApi.Router do
     get "/questions/start", QuestionController, :index
     get "/questions", QuestionController, :show
 
+    get "/prompts/start", PromptController, :start
     resources "/prompts", PromptController, except: [:new, :edit]
     resources "/answers", AnswerController, except: [:new, :edit]
   end
