@@ -98,10 +98,10 @@ defmodule GithubflowApi.DecisionTreeDataParser do
           complete: 0 == length(possible.children)
         }
       _ ->
-        Enum.reduce(tree.children, nil, fn child, accum ->
+        Enum.reduce_while(tree.children, nil, fn child, accum ->
           result = find_question(child, from_prompt, response)
 
-          unless {:not_found} == result, do: result, else: accum
+          unless {:not_found} == result, do: {:halt, result}, else: {:cont, accum}
         end)
     end
   end
