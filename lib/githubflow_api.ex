@@ -12,7 +12,7 @@ defmodule GithubflowApi do
       # Start the Ecto repository
       supervisor(GithubflowApi.Repo, []),
       # Here you could define other workers and supervisors as children
-      # worker(GithubflowApi.Worker, [arg1, arg2, arg3]),
+      worker(GithubflowApi.DecisionTree, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

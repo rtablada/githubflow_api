@@ -7,23 +7,10 @@ end
 
 defmodule GithubflowApi.QuestionController do
   use GithubflowApi.Web, :controller
+  alias GithubflowApi.DecisionTree
 
   def index(conn, _params) do
-    data =  %{
-      id: 1,
-      prompt: "Is this a new feature?",
-      complete: false,
-      responses: [
-        %{
-          text: "Yes",
-          question: 2
-        },
-        %{
-          text: "No",
-          question: 3
-        }
-      ]
-    }
+    data =  DecisionTree.find 1
 
     res_data = GithubflowApi.QuestionSerializer.format(data, conn)
     # |> Poison.encode!
