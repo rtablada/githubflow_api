@@ -33,5 +33,6 @@ defmodule GithubflowApi.Endpoint do
     key: "_githubflow_api_key",
     signing_salt: "3RgDd8ES"
 
+  plug CORSPlug
   plug GithubflowApi.Router
 end
